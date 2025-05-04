@@ -4,37 +4,8 @@
             [helix.hooks :as hooks]
             [pbranes.sbx.icons :refer [arrow-back-icon chevron-right-icon down-arrow-icon close-icon menu-icon settings-icon]]
             [pbranes.sbx.domutils :refer [query-selector]]
-            [react-router-dom :refer [Outlet, Link]]
+            [react-router-dom :refer [Outlet]]
             [react-transition-group :refer [CSSTransition]]))
-
-(defn set-sidbar-display! [value]
-  (set! (.. (query-selector ".sidebar") -style -display) value))
-
-(defn show-sidebar! []
-  (set-sidbar-display! "flex"))
-
-(defn hide-sidebar! []
-  (set-sidbar-display! "none"))
-
-(defnc Sidbar []
-  (d/nav
-   (d/ul {:class "sidebar"}
-         (d/li {:on-click hide-sidebar!} ($ Link {:to "#"} ($ close-icon {:fill "white"})))
-         (d/li ($ Link {:to "/"} "PBranes"))
-         (d/li ($ Link {:to "/wdc"} "Blog"))
-         (d/li ($ Link {:to "#"} "product"))
-         (d/li ($ Link {:to "#"} "forum"))
-         (d/li ($ Link {:to "#"} "login")))))
-
-(defnc Navbar-bak []
-  (d/nav
-   (d/ul
-    (d/li {:class "hideOnmobile"} ($ Link {:to "/" :className "hideOnMobile"} "PBranes"))
-    (d/li {:class "hideOnMobile"} ($ Link {:to "/wdc"} "Blog" ($ down-arrow-icon)))
-    (d/li {:class "hideOnMobile"} ($ Link {:to "#"} "Product" ($ down-arrow-icon)))
-    (d/li {:class "hideOnMobile"} ($ Link {:to "#"} "Forum" ($ down-arrow-icon)))
-    (d/li {:class "hideOnMobile"} ($ Link {:to "#"} "Login"))
-    (d/li {:class "menu-button" :on-click show-sidebar!} (d/a {:href "#"} ($ menu-icon))))))
 
 (defnc DropdownMenu []
   (let [[active-menu set-active-menu] (hooks/use-state "main")
